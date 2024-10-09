@@ -9,5 +9,6 @@
         public int ServiceCategoryId { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public ICollection<TechnicianService> TechnicianService { get; set; }
     }
 }

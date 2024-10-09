@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingService.PLL.Interfaces
+namespace BookingService.BLL.Interfaces
 {
     public interface ICategory
     {

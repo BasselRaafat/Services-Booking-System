@@ -1,5 +1,5 @@
 ﻿using BookingService.DAL.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 using BookingService.DAL.Data.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.SqlServer;
+using System.Reflection;
 
-
-public class AppContext : IdentityDbContext<ApplicationUser>
+namespace BookingService.DAL.Data;
+public class AppDbContext : IdentityDbContext<ApplicationUser>
 {
     public DbSet<Booking> Booking { get; set; }
     public DbSet<User> User { get; set; }
@@ -20,15 +21,20 @@ public class AppContext : IdentityDbContext<ApplicationUser>
     public DbSet<TechnicianService> TechnicianService { get; set; }
 
     //In case overload 
-    public AppContext(DbContextOptions options) : base(options)
+    public AppDbContext(DbContextOptions options) : base(options)
     {
     }
 
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-    //    optionsBuilder.UseSqlServer
-    //        ("Data Source=.;Initial Catalog=MVCDemo;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
-    //    base.OnConfiguring(optionsBuilder);
-    //}
+	//protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	//{
+	//    optionsBuilder.UseSqlServer
+	//        ("Data Source=.;Initial Catalog=MVCDemo;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
+	//    base.OnConfiguring(optionsBuilder);
+	//}
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		base.OnModelCreating(modelBuilder);
+		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+	}
 
 }

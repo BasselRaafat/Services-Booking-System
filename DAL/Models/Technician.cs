@@ -30,9 +30,11 @@ namespace BookingService.DAL.Models
         public string Address { get; set; }
 
         public int ReviewId { get; set; }
-        public ICollection<Review> Reviews { get; set; }
         public int BookingId { get; set; }
+        public ICollection<Review> Reviews { get; set; }
         public ICollection<Booking> Bookings { get; set; }
+
+        public ICollection<TechnicianService> TechnicianService { get; set; }
 
     }
 }

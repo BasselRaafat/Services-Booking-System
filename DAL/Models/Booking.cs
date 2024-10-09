@@ -1,25 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BookingService.DAL.Models
+namespace BookingService.DAL.Models;
+
+public class Booking
 {
-    public class Booking
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public DateTime Date { get; set; }
+    public DateTime Date { get; set; }
 
-        public string Status { get; set; }
+    public string Status { get; set; }
 
-        public string TotalPrice { get; set; }
+    public string TotalPrice { get; set; }
 
-        [ForeignKey("User")]
-        public string UserID { get; set; }
+    [ForeignKey("User")]
+    public int UserID { get; set; }
 
-        public User User { get; set; }
 
-        [ForeignKey("Technician")]
-        public string TechnicianID { get; set; }
+    [ForeignKey("Technician")]
+    public int TechnicianID { get; set; }
+    public User User { get; set; }
 
-        public Technician Technician { get; set; }
-    }
+    public Technician Technician { get; set; }
 }

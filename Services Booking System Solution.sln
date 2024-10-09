@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingService.PL", "Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingService.DAL", "DAL\BookingService.DAL.csproj", "{0630C8D1-46F3-41C1-81E1-D27B33CF6DCE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingService.PLL", "PLL\BookingService.PLL.csproj", "{33EBFDC8-9A31-4E52-94E6-768AEBCE452E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingService.BLL", "PLL\BookingService.BLL.csproj", "{33EBFDC8-9A31-4E52-94E6-768AEBCE452E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
