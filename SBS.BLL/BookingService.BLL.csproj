@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DAL\BookingService.DAL.csproj" />
+    <ProjectReference Include="..\SBS.DAL\BookingService.DAL.csproj" />
   </ItemGroup>
 
 </Project>
