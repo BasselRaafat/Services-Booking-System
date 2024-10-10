@@ -2,9 +2,8 @@
 
 namespace BookingService.DAL.Models;
 
-public class Booking
+public class Booking:ModelsBase
 {
-    public int Id { get; set; }
 
     public DateTime Date { get; set; }
 

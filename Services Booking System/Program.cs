@@ -9,12 +9,11 @@ namespace Services_Booking_System
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
-
+			// Add services to the container.
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
 				));
-			// Add services to the container.
 
 			var app = builder.Build();
 

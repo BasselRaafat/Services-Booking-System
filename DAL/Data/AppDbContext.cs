@@ -19,6 +19,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Service> Service { get; set; }
     public DbSet<Technician> Technician { get; set; }
     public DbSet<TechnicianService> TechnicianService { get; set; }
+	public DbSet<Review> Review { get; set; }
 
     //In case overload 
     public AppDbContext(DbContextOptions options) : base(options)

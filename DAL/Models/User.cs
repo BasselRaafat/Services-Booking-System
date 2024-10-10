@@ -2,9 +2,8 @@
 
 namespace BookingService.DAL.Models;
 
-public class User
+public class User : ModelsBase
 {
-    public int Id { get; set; }
 
     public string Name { get; set; }
 
