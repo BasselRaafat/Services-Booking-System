@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace BookingService.DAL.Data.Configurations
+namespace BookingService.DAL.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class addmodlebaseclass : Migration
+    public partial class AddModelBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
