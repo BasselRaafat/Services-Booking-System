@@ -7,16 +7,6 @@ using System.Threading.Tasks;
 
 namespace BookingService.BLL.Interfaces;
 
-public interface IUserRepository
+public interface IUserRepository : IGenericRepository<User>
 {
-    public void Add(User obj);
-
-    public void Update(User obj);
-
-    public void Delete(int id);
-
-    public List<User> GetAll();
-    public User GetById(int id);
-
-    public void Save();
 }

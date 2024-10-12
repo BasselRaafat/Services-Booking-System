@@ -7,16 +7,6 @@ using System.Threading.Tasks;
 
 namespace BookingService.BLL.Interfaces;
 
-public interface IBookingRepository
+public interface IBookingRepository : IGenericRepository<Booking>
 {
-    public void Add(Booking obj);
-
-    public void Update(Booking obj);
-
-    public void Delete(int id);
-
-    public List<Booking> GetAll();
-    public Booking GetById(int id);
-
-    public void Save();
 }

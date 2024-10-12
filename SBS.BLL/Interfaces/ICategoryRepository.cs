@@ -7,16 +7,6 @@ using System.Threading.Tasks;
 
 namespace BookingService.BLL.Interfaces;
 
-public interface ICategoryRepository
+public interface ICategoryRepository : IGenericRepository<Category>
 {
-    public void Add(Category obj);
-
-    public void Update(Category obj);
-
-    public void Delete(int id);
-
-    public List<Category> GetAll();
-    public Category GetById(int id);
-
-    public void Save();
 }

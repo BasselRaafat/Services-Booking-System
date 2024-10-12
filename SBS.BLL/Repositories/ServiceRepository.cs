@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace BookingService.BLL.Repositories;
 
-public class IServiceRepository : GenericRepository<Service>
+public class ServiceRepository : GenericRepository<Service> , IServiceRepository
 
 {
-	public IServiceRepository(AppDbContext dbcontext) : base(dbcontext)
+	public ServiceRepository(AppDbContext dbcontext) : base(dbcontext)
 	{
 	}
 }
