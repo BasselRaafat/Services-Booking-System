@@ -45,7 +45,6 @@ namespace WEBPage.Controllers
                 user.Address = registerView.Address;
                 user.FirstName = registerView.FirstName;
                 user.LastName = registerView.LastName;
-                user.PasswordHash = registerView.Password;
                 user.Email = registerView.Email;
                 user.PhoneNumber = registerView.PhoneNumber;
                 user.UserName = registerView.Email;
@@ -103,12 +102,11 @@ namespace WEBPage.Controllers
                 user.Address = registerView.Address;
                 user.FirstName = registerView.FirstName;
                 user.LastName = registerView.LastName;
-                user.PasswordHash = registerView.Password;
                 user.Email = registerView.Email;
                 user.PhoneNumber = registerView.PhoneNumber;
                 user.UserName = registerView.Email;
 
-                IdentityResult identityResult = await UserManager.CreateAsync(user);
+                IdentityResult identityResult = await UserManager.CreateAsync(user,registerView.Password);
                 if (identityResult.Succeeded)
                 {
                     await UserManager.AddToRoleAsync(user, "Technician");
