@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace BookingService.BLL.Repositories;
 
+<<<<<<< HEAD
 public class BookingRepository: GenericRepository<Booking>,IBookingRepository
+=======
+public class BookingRepository: GenericRepository<Booking> 
+>>>>>>> origin/manar
 {
 	public BookingRepository(AppDbContext dbcontext) : base(dbcontext)
 	{

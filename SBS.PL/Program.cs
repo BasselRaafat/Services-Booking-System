@@ -3,9 +3,22 @@ using BookingService.BLL.Repositories;
 using BookingService.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using BookingService.DAL;
+using WEBPage.Models.Identity;
+using Microsoft.AspNetCore.Identity;
+using BookingService.BLL.Services;
+using BookingService.BLL.Repositories;
 
-namespace Services_Booking_System
+var builder = WebApplication.CreateBuilder(args);
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
+
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
 {
+<<<<<<< HEAD
 	public class Program
 	{
 		public static void Main(string[] args)
@@ -18,27 +31,39 @@ namespace Services_Booking_System
 				));
 			builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 			var app = builder.Build();
+=======
+    option.Password.RequiredLength = 8;
+    option.Password.RequireDigit = true;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireUppercase = false;
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
-			// Configure the HTTP request pipeline.
-			if (!app.Environment.IsDevelopment())
-			{
-				app.UseExceptionHandler("/Home/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-				app.UseHsts();
-			}
+>>>>>>> origin/manar
 
-			app.UseHttpsRedirection();
-			app.UseStaticFiles();
 
-			app.UseRouting();
+var app = builder.Build();
 
-			app.UseAuthorization();
+	await app.Services.SeedIdentityAsync();
 
-			app.MapControllerRoute(
-				name: "default",
-				pattern: "{controller=Home}/{action=Index}/{id?}");
 
-			app.Run();
-		}
-	}
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+	app.UseExceptionHandler("/Home/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute(
+	name: "default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();
+
