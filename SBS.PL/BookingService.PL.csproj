@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SBS.BLL\BookingService.BLL.csproj" />
+    <ProjectReference Include="..\SBS.DAL\BookingService.DAL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,42 +1,52 @@
 using BookingService.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using BookingService.DAL;
+using WEBPage.Models.Identity;
+using Microsoft.AspNetCore.Identity;
+using BookingService.BLL.Services;
+using BookingService.BLL.Repositories;
 
-namespace Services_Booking_System
+var builder = WebApplication.CreateBuilder(args);
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
+
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
 {
-	public class Program
-	{
-		public static void Main(string[] args)
-		{
-			var builder = WebApplication.CreateBuilder(args);
-			// Add services to the container.
-			builder.Services.AddControllersWithViews();
-			builder.Services.AddDbContext<AppDbContext>(options =>
-				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
-				));
+    option.Password.RequiredLength = 8;
+    option.Password.RequireDigit = true;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireUppercase = false;
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
-			var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
-			if (!app.Environment.IsDevelopment())
-			{
-				app.UseExceptionHandler("/Home/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-				app.UseHsts();
-			}
 
-			app.UseHttpsRedirection();
-			app.UseStaticFiles();
+var app = builder.Build();
 
-			app.UseRouting();
+	await app.Services.SeedIdentityAsync();
 
-			app.UseAuthorization();
 
-			app.MapControllerRoute(
-				name: "default",
-				pattern: "{controller=Home}/{action=Index}/{id?}");
-
-			app.Run();
-		}
-	}
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+	app.UseExceptionHandler("/Home/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute(
+	name: "default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();
+
