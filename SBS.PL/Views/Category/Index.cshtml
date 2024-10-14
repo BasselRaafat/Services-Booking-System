@@ -5,18 +5,61 @@
     var Categories = await _categoryRepo.GetAll();
 }
 
-<h1>Categories</h1>
-<div class="d-flex justify-content-start flex-row flex-wrap align-items-center">
-    @foreach (var Category in Categories)
+
+<section class="hero-section position-relative">
+    <img src="~/files/images/xabvokgynbkytiuukhqq.png" class="img-fluid pb-5" alt="Hero Image" style="width:100vw">
+    <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
+        <h1 class="text-white fw-bold">Your to-do list is on us.</h1>
+    </div>
+</section>
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var Category in Categories)
+        {
+            <div class="col-md-6 mb-4 d-flex align-items-stretch">
+                <div class="card" style="width: 100%; height: 100%;">
+                <img src="~/files/images/@Category.PhotoName" class="card-img-top" style="height: 250px; object-fit: cover;" alt="@Category.Name" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">@Category.Name</h5>
+                    <a asp-controller="Services" asp-action="Index" asp-route-id="@Category.Id" class="btn btn-success">
+                        View Services
+                    </a>
+                </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@* @foreach (var Category in Categories)
     {
         <div class="d-flex justify-content-center flex-column flex-wrap align-items-center m-4">
-            <img src="~/files/images/@Category.PhotoName" height="300" class="rounded-3"/>
+            <img src="~/files/images/@Category.PhotoName" height="300" class="rounded-3 overflow-hidden" />
             <div class="p-5 display-5">
                 <a asp-controller="Services" asp-action="Index" asp-route-id="@Category.Id">
-                    @Category.Name 
+                    @Category.Name
+                </a>
+            </div>
+        </div>
+    }*@
+
+@*<div class="d-flex justify-content-start flex-row flex-wrap align-items-center p-2">
+    @foreach (var Category in Categories)
+    {
+        <div class="card m-4" style="width: 18rem;">
+            <img src="~/files/images/@Category.PhotoName" class="card-img-top" style="height: 200px; object-fit: cover;" alt="@Category.Name" />
+            <div class="card-body text-center">
+                <h5 class="card-title">@Category.Name</h5>
+                <a asp-controller="Services" asp-action="Index" asp-route-id="@Category.Id" class="btn btn-success">
+                    View Services
                 </a>
             </div>
         </div>
     }
 </div>
 
+
+*@
