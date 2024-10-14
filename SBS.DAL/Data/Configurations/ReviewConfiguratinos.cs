@@ -13,6 +13,8 @@ namespace BookingService.DAL.Data.Configurations
 	{
 		public void Configure(EntityTypeBuilder<Review> builder)
 		{
+			builder.Property(r => r.Rating)
+				.HasColumnType("decimal(2,1)");
 		}
 	}
 }

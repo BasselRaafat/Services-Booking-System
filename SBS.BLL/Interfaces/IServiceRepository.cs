@@ -9,4 +9,5 @@ namespace BookingService.BLL.Interfaces;
 
 public interface IServiceRepository : IGenericRepository<Service>
 {
+    public IQueryable<Service> GetByCategoryId(int categoryId);
 }

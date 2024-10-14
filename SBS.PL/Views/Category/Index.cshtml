@@ -1,0 +1,22 @@
+﻿@inject ICategoryRepository _categoryRepo
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "_Layout";
+    var Categories = await _categoryRepo.GetAll();
+}
+
+<h1>Categories</h1>
+<div class="d-flex justify-content-start flex-row flex-wrap align-items-center">
+    @foreach (var Category in Categories)
+    {
+        <div class="d-flex justify-content-center flex-column flex-wrap align-items-center m-4">
+            <img src="~/files/images/@Category.PhotoName" height="300" class="rounded-3"/>
+            <div class="p-5 display-5">
+                <a asp-controller="Services" asp-action="Index" asp-route-id="@Category.Id">
+                    @Category.Name 
+                </a>
+            </div>
+        </div>
+    }
+</div>
+

@@ -1,0 +1,18 @@
+﻿@using Services_Booking_System.View_Models
+@model CategoryViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<form asp-action="Edit" enctype="multipart/form-data">
+
+    <partial name="_CreateEditCategoryPartial"></partial>
+    <img src="~/files/images/@Model.PhotoName" height="300" class="mt-4 mb-4 rounded-3" />
+    <br />
+    <input class="btn btn-primary" type="submit" value="Edit" />
+</form>
+<partial name="_ValidationScriptsPartial"></partial>
+
+

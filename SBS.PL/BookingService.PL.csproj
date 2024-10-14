@@ -8,10 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Categories\**" />
-    <Content Remove="Views\Categories\**" />
-    <EmbeddedResource Remove="Views\Categories\**" />
-    <None Remove="Views\Categories\**" />
+    <None Include="Views\Category\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

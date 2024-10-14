@@ -17,6 +17,7 @@ namespace Services_Booking_System
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
 				));
 			builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
+			builder.Services.AddScoped<IServiceRepository,ServiceRepository>();
 			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.

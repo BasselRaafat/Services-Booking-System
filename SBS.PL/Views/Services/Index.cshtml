@@ -1,0 +1,37 @@
+﻿@model IQueryable<Service>
+@inject ICategoryRepository _categoryRepo
+@{
+    ViewData["Title"] = "Index";
+    IEnumerable<Service> services = Model; 
+    Category category = @_categoryRepo.GetById(ViewBag.CategoryId);
+
+}
+<h1>@category.Name</h1>
+@foreach (var service in services)
+{
+    <div class="container mt-4">
+        <div class="card mb-3 shadow-sm">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="" class="card-img" alt="Door, Cabinet, and Furniture Repair">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@service.Name</h5>
+                        <p class="card-text">@service.Description</p>
+                        <a href="#" class="btn btn-success">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@*
+<div class="border-1 border-dark">
+    <p>@service.Name</p>
+    <p>@service.Description</p>
+    <p>@service.BasePrice</p>
+    <a class="btn-info" asp-action="Book">Book</a>
+</div>
+*@

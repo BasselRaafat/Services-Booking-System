@@ -1,6 +1,6 @@
 ﻿namespace Services_Booking_System.Helpers;
 
-public class Files
+public static class Files
 {
     public static string UploadFile(IFormFile file, string folderName)
     {
