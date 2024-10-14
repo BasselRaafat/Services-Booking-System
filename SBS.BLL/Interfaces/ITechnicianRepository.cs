@@ -7,16 +7,6 @@ using System.Threading.Tasks;
 
 namespace BookingService.BLL.Interfaces;
 
-public interface ITechnicianRepository
+public interface ITechnicianRepository : IGenericRepository<Technician>
 {
-    public void Add(Technician obj);
-
-    public void Update(Technician obj);
-
-    public void Delete(int id);
-
-    public List<Technician> GetAll();
-    public Technician GetById(int id);
-
-    public void Save();
 }

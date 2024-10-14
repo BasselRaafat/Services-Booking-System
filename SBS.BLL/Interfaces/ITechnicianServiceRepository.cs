@@ -9,14 +9,14 @@ namespace BookingService.BLL.Interfaces;
 
 public interface ITechnicianServiceRepository
 {
-    public void Add(TechnicianService obj);
+    public void Add(TechnicianService entity);
 
-    public void Update(TechnicianService obj);
+    public void Update(TechnicianService entity);
 
-    public void Delete(int id);
+    public void Delete(TechnicianService entity);
 
-    public List<TechnicianService> GetAll();
-    public TechnicianService GetById(int id);
+    public Task<IEnumerable<TechnicianService>> GetAll();
+    public Task<TechnicianService> GetById(int ServiceId, int TechnicianId);
 
-    public void Save();
+    public int Save();
 }

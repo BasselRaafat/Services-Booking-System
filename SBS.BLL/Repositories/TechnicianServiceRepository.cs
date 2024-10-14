@@ -1,4 +1,5 @@
-﻿using BookingService.DAL.Data;
+﻿using BookingService.BLL.Interfaces;
+using BookingService.DAL.Data;
 using BookingService.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace BookingService.BLL.Repositories;
 
-public class TechnicianServiceRepository
-{
+public class TechnicianServiceRepository : ITechnicianServiceRepository
+{ 
 	private protected AppDbContext _dbContext;
 	public TechnicianServiceRepository(AppDbContext dbcontext)
 	{
@@ -21,12 +22,12 @@ public class TechnicianServiceRepository
 		_dbContext.Add(entity);
 	}
 
-	public void delete(TechnicianService entity)
+	public void Delete(TechnicianService entity)
 	{
 		_dbContext.Set<TechnicianService>().Remove(entity);
 	}
 
-	public async Task<TechnicianService> Get(int ServiceId,int TechnicianId)
+	public async Task<TechnicianService> GetById(int ServiceId,int TechnicianId)
 	{
 		return await _dbContext.FindAsync<TechnicianService>(ServiceId,TechnicianId);
 
@@ -46,4 +47,6 @@ public class TechnicianServiceRepository
 	{
 		return _dbContext.SaveChanges();
 	}
+
+
 }

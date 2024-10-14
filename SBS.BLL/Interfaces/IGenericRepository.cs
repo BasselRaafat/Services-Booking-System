@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookingService.BLL.Interfaces;
 
-public interface IGenericRepository<T>
+public interface IGenericRepository<T> where T : ModelsBase
 {
 	public void Add(T entity);
 
