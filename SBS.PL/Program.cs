@@ -15,7 +15,9 @@ namespace Services_Booking_System
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
-				));
+
+                sqlOptions => sqlOptions.MigrationsAssembly("BookingService.DAL")
+                ));
 			builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 			var app = builder.Build();
 
