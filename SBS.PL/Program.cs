@@ -1,5 +1,3 @@
-using BookingService.BLL.Interfaces;
-using BookingService.BLL.Repositories;
 using BookingService.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,27 +16,12 @@ builder.Services.AddApplication(builder.Configuration);
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(option =>
 {
-<<<<<<< HEAD
-	public class Program
-	{
-		public static void Main(string[] args)
-		{
-			var builder = WebApplication.CreateBuilder(args);
-			// Add services to the container.
-			builder.Services.AddControllersWithViews();
-			builder.Services.AddDbContext<AppDbContext>(options =>
-				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
-				));
-			builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
-			var app = builder.Build();
-=======
     option.Password.RequiredLength = 8;
     option.Password.RequireDigit = true;
     option.Password.RequireNonAlphanumeric = false;
     option.Password.RequireUppercase = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
->>>>>>> origin/manar
 
 
 var app = builder.Build();
@@ -66,4 +49,5 @@ app.MapControllerRoute(
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
 
