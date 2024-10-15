@@ -4,6 +4,7 @@ using BookingService.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingService.DAL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241012120403_DeleteNationalIdFromUser")]
+    partial class DeleteNationalIdFromUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,9 +71,6 @@ namespace BookingService.DAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhotoName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Category");
@@ -88,8 +88,8 @@ namespace BookingService.DAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(2,1)");
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<int>("TechnicianId")
                         .HasColumnType("int");
@@ -129,9 +129,6 @@ namespace BookingService.DAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhotoName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ServiceCategoryId")
                         .HasColumnType("int");
 
@@ -158,11 +155,15 @@ namespace BookingService.DAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("BookingId")
+                    b.Property<int>("BookingId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BookingNumber")
+                    b.Property<int>("BookingNumber")
                         .HasColumnType("int");
+
+                    b.Property<string>("Certification")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -197,9 +198,9 @@ namespace BookingService.DAL.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(2,1)");
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ReviewId")
+                    b.Property<int>("ReviewId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -408,6 +409,12 @@ namespace BookingService.DAL.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ActorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ActorType")
                         .HasColumnType("int");
 
                     b.Property<string>("Address")

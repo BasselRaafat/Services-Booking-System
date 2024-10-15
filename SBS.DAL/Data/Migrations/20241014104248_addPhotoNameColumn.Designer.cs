@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BookingService.DAL.Data.Configurations
+namespace BookingService.DAL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20241014104248_addPhotoNameColumn")]

@@ -21,6 +21,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SBS.BLL\BookingService.BLL.csproj" />
+    <ProjectReference Include="..\SBS.DAL\BookingService.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\" />
   </ItemGroup>
 
 </Project>

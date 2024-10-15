@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookingService.BLL.Repositories;
 
-internal class UserRepository : GenericRepository<User>
+public class UserRepository : GenericRepository<User>
 {
 	public UserRepository(AppDbContext dbcontext) : base(dbcontext)
 	{

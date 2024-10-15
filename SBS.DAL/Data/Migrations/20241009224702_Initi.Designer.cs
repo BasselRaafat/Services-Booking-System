@@ -13,7 +13,7 @@ namespace BookingService.DAL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20241009224702_init")]
-    partial class init
+    partial class Initi
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

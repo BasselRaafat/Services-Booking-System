@@ -2,17 +2,17 @@
 
 #nullable disable
 
-namespace BookingService.DAL.Data.Configurations
+namespace BookingService.DAL.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class addPhotoNameColumn : Migration
+    public partial class AddPathProperty : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "PhotoName",
-                table: "Service",
+                name: "PhotoPath",
+                table: "Category",
                 type: "nvarchar(max)",
                 nullable: true);
         }
@@ -21,8 +21,8 @@ namespace BookingService.DAL.Data.Configurations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "PhotoName",
-                table: "Service");
+                name: "PhotoPath",
+                table: "Category");
         }
     }
 }
