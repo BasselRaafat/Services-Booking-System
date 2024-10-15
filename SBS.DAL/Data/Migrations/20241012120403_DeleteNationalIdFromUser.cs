@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BookingService.DAL.Data.Configurations
+namespace BookingService.DAL.Data.Migrations
 {
     /// <inheritdoc />
     public partial class DeleteNationalIdFromUser : Migration

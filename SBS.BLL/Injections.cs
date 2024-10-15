@@ -1,6 +1,8 @@
-﻿using BookingService.BLL.Repositories;
+﻿using BookingService.BLL.Interfaces;
+using BookingService.BLL.Repositories;
 using BookingService.BLL.Services;
 using BookingService.DAL.Data;
+using BookingService.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +29,8 @@ namespace BookingService.DAL
             service.AddScoped<UserService>();
             service.AddScoped<TechnicianServices>();
             service.AddScoped<TechnicianRepository>();
+            service.AddScoped<ICategoryRepository, CategoryRepository>();
+            service.AddScoped<IServiceRepository, ServiceRepository>();
         }
     }
 }
