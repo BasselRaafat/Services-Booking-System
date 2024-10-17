@@ -24,12 +24,13 @@ public class Technician : ModelsBase
 
     public string City { get; set; }
 
-    public decimal Rating { get; set; }
 
     public string Address { get; set; }
 
-    public int ReviewId { get; set; }
-    public int BookingId { get; set; }
+    public double Price { get; set; }
+
+    //public int ReviewId { get; set; }
+    //public int BookingId { get; set; }
     public ICollection<Review> Reviews { get; set; }
     public ICollection<Booking> Bookings { get; set; }
 

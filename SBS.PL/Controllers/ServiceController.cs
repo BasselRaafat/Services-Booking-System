@@ -1,7 +1,9 @@
 ﻿using BookingService.DAL.Data;
 using BookingService.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Services_Booking_System.View_Models;
+using System.Globalization;
 
 namespace Services_Booking_System.Controllers
 {
@@ -19,9 +21,9 @@ namespace Services_Booking_System.Controllers
             return View();
         }
 
-        public IActionResult ServiceDetails()
+        public IActionResult ServiceDetails(string sortBy = "recommended", decimal? minPrice = null, decimal? maxPrice = null)
         {
-            int ServiceId = 1;
+            int ServiceId = 3;
             if (!ModelState.IsValid)
             {
                 return View(ModelState);
@@ -50,13 +52,70 @@ namespace Services_Booking_System.Controllers
                     TechnicianReview = averageRating,
                 });
             }
+
+
+
+            // Apply price range filtering
+            ViewBag.MinPrice = minPrice;
+            ViewBag.MaxPrice = maxPrice;
+            if (minPrice.HasValue)
+            {
+                serviceProviders = serviceProviders.Where(sp => sp.TechnicianPrice >= minPrice.Value).ToList();
+            }
+
+            if (maxPrice.HasValue)
+            {
+                serviceProviders = serviceProviders.Where(sp => sp.TechnicianPrice <= maxPrice.Value).ToList();
+            }
+
+
+
+            //sorting //////
+
+            SortBy(sortBy);
+            switch (sortBy)
+            {
+                case "1": // Price DESC
+                    serviceProviders = serviceProviders.OrderByDescending(sp => sp.TechnicianPrice).ToList();
+                    break;
+                case "2": // Price ASC
+                    serviceProviders = serviceProviders.OrderBy(sp => sp.TechnicianPrice).ToList();
+                    break;
+                case "3": // Rating
+                    serviceProviders = serviceProviders.OrderByDescending(sp => sp.TechnicianReview).ToList();
+                    break;
+                default: 
+                    break;
+            }
+            /////
+
+
             var serviceDetails = new ServiceDetailsViewModel()
             {
                 ServiceTitle = serviceDb.Name,
                 ServiceDescription = serviceDb.Description,
                 ServiceProviders = serviceProviders
             };
+            
             return View(serviceDetails);
+        }
+
+
+
+        public class SortItem
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+        public void SortBy(string sortBy)
+        {
+            List<SortItem> items = new List<SortItem> {
+                new SortItem() {Id = 0, Name = "Recommended" },
+                new SortItem() {Id = 1, Name = "Price DESC" },
+                new SortItem() {Id = 2, Name = "Price ASC" },
+                new SortItem() {Id = 3, Name = "Rating" }
+            };
+            ViewBag.SortItems = new SelectList(items, "Id", "Name", sortBy);
         }
     }
 }

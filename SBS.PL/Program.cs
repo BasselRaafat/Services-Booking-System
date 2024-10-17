@@ -14,7 +14,7 @@ namespace Services_Booking_System
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddDbContext<AppDbContext>(options =>
-				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
+				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
 
                 sqlOptions => sqlOptions.MigrationsAssembly("BookingService.DAL")
                 ));
@@ -38,7 +38,7 @@ namespace Services_Booking_System
 
 			app.MapControllerRoute(
 				name: "default",
-				pattern: "{controller=Home}/{action=Index}/{id?}");
+				pattern: "{controller=Home}/{action=Index}/{Id?}");
 
 			app.Run();
 		}
