@@ -15,7 +15,7 @@ public interface IGenericRepository<T>
 
 	public void delete(T entity);
 
-	public  Task<T> Get(int id);
+	public  T GetById(int id);
 	public  Task<IEnumerable<T>> GetAll();
 	public void Update(T entity);
 	public int Save();
