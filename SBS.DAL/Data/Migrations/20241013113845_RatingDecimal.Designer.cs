@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BookingService.DAL.Data.Configurations
+namespace BookingService.DAL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241012210211_AddPathProperty")]
-    partial class AddPathProperty
+    [Migration("20241013113845_RatingDecimal")]
+    partial class RatingDecimal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,7 +149,7 @@ namespace BookingService.DAL.Data.Configurations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhotoPath")
+                    b.Property<string>("PhotoName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -169,8 +169,8 @@ namespace BookingService.DAL.Data.Configurations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Rating")
+                        .HasColumnType("decimal(2,1)");
 
                     b.Property<int>("TechnicianId")
                         .HasColumnType("int");
@@ -275,7 +275,7 @@ namespace BookingService.DAL.Data.Configurations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(2,1)");
 
                     b.Property<int>("ReviewId")
                         .HasColumnType("int");

@@ -1,0 +1,18 @@
+﻿@using Services_Booking_System.Controllers;
+@using Services_Booking_System.View_Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model CategoryViewModel;
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<form asp-action="Create" enctype="multipart/form-data">
+
+    <partial name="_CreateEditCategoryPartial"></partial>
+        <br />
+    <input class="btn btn-primary" type="submit" value="Create" />
+</form>
+<partial name="_ValidationScriptsPartial" ></partial>
+

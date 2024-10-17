@@ -1,0 +1,18 @@
+﻿@inject IServiceRepository _servciveRepo
+@inject ICategoryRepository _categoryRepo;
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "_Layout";
+    var id = ViewBag.id;
+    IQueryable<Service> services = _servciveRepo.GetByCategoryId(id);
+    var category = await _categoryRepo.GetById(id);
+}
+
+<h1>@category.Name</h1>
+<div>
+    @foreach (var service in services)
+    {
+        @service.Name
+    }
+</div>
+

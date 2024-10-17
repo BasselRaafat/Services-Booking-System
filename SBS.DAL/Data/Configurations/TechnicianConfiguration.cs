@@ -23,5 +23,7 @@ internal class TechnicianConfiguration : IEntityTypeConfiguration<Technician>
 			.WithOne(ts => ts.Technician)
 			.HasForeignKey(ts => ts.ServiceId)
 			.HasConstraintName("Technician_Service_FK");
-	}
+        builder.Property(t => t.Rating)
+                .HasColumnType("decimal(2,1)");
+    }
 }

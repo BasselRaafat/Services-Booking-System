@@ -1,3 +1,4 @@
+
 ﻿using BookingService.DAL.Models;
 
 namespace Services_Booking_System.View_Models
@@ -20,3 +21,13 @@ namespace Services_Booking_System.View_Models
         public int ReviewsNum { get; set; }
     }
 }
+
+﻿//namespace WEBPage.View_Models
+//{
+//    public class ServiceDetailsViewModel
+//    {
+//        public Service Service { get; set; }
+//        public IEnumerable<Technician> Technicians { get; set; }
+//    }
+//}
+
