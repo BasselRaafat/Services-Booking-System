@@ -13,9 +13,9 @@ public interface IGenericRepository<T> where T : ModelsBase
 {
 	public void Add(T entity);
 
-	public void delete(T entity);
+	public void Delete(T entity);
 
-	public  T GetById(int id);
+	public  Task<T> GetById(int id);
 	public  Task<IEnumerable<T>> GetAll();
 	public void Update(T entity);
 	public int Save();
