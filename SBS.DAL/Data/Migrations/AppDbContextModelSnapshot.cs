@@ -131,7 +131,7 @@ namespace BookingService.DAL.Data.Migrations
                     b.Property<string>("PhotoName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ServiceCategoryId")
+                    b.Property<int>("ServiceCategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -194,6 +194,9 @@ namespace BookingService.DAL.Data.Migrations
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(2,1)");

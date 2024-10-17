@@ -96,7 +96,7 @@ public class CategoryController : Controller
 
 	[HttpPost]
     public async Task<IActionResult> Delete(int id)
-    {
+	{
 		Category cat= await _categoryRepo.GetById(id);
         if (cat.PhotoName is not null)
             Files.DeleteFile(cat.PhotoName, "Images");
@@ -104,7 +104,7 @@ public class CategoryController : Controller
 		_categoryRepo.Delete(cat);
 		_categoryRepo.Save();
         return RedirectToAction("Index");
-    }
+	}
     //Admin
     public IActionResult Detail(int id) 
 	{
