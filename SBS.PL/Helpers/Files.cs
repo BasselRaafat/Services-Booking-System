@@ -26,7 +26,7 @@ public static class Files
     public static void DeleteFile(string fileName, string folderName)
     {
 
-        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folderName, fileName);
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\files", folderName, fileName);
 
         if (File.Exists(filePath))
             File.Delete(filePath);

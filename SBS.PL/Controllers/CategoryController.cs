@@ -53,58 +53,43 @@ public class CategoryController : Controller
 	//Admin
 
 	[HttpGet]
-	public async Task<IActionResult> Edit(int id)
+ ///public async Task<IActionResult> Edit(int id) 
+///{
+///var category = await _categoryRepo.GetById(id);
+///var categoryViewModel = new CategoryViewModel()
+///{
+///	Name = category.Name,
+///	PhotoName = category.PhotoName,
+///};
+///return View(categoryViewModel);
+///}
+///A//dmin
+///[//HttpPost]
+ ///public IActionResult Edit(CategoryViewModel _category)
+ ///{
+ ///    if (ModelState.IsValid)
+ ///    {
+///	if(_category.PhotoName is not null)
+///		Files.DeleteFile(_category.PhotoName, "Images");
+ ///        var photoname = Files.UploadFile(_category.Photo, "images");
+ ///        var category = new Category()
+ ///        {
+ ///            Name = _category.Name,
+ ///            PhotoName = photoname
+ ///
+ ///        };
+ ///        _categoryRepo.Update(category);
+ ///        _categoryRepo.Save();
+ ///        return RedirectToAction(nameof(Index));
+ ///    }
+ ///    return View(_category);
+ ///}
+ ///Admin
+
+    public IActionResult Delete(int id) 
 	{
-		var category = await _categoryRepo.GetById(id);
-		var categoryViewModel = new CategoryViewModel()
-		{
-			CategoryId = category.Id,
-			Name = category.Name,
-			PhotoName = category.PhotoName,
-		};
-		return View(categoryViewModel);
+		return View();
 	}
- //Admin
- 	[HttpPost]
-	public IActionResult Edit(CategoryViewModel _category)
-	{
-		if (ModelState.IsValid)
-		{
-			if (_category.PhotoName is not null)
-				Files.DeleteFile(_category.PhotoName, "Images");
-			var photoname = Files.UploadFile(_category.Photo, "images");
-			var category = new Category()
-			{
-				Id=_category.CategoryId,
-				Name = _category.Name,
-				PhotoName = photoname
-
-			};
-			_categoryRepo.Update(category);
-			_categoryRepo.Save();
-			return RedirectToAction(nameof(Index));
-		}
-		return View(_category);
-	}
-	//Admin
-
-	//[HttpGet]
-	//public IActionResult Delete(int id) 
-	//{
-	//	return View();
-	//}
-
-	[HttpPost]
-    public async Task<IActionResult> Delete(int id)
-    {
-		Category cat= await _categoryRepo.GetById(id);
-        if (cat.PhotoName is not null)
-            Files.DeleteFile(cat.PhotoName, "Images");
-        if (cat == null) {  return View("Error"); }
-		_categoryRepo.Delete(cat);
-		_categoryRepo.Save();
-        return RedirectToAction("Index");
-    }
     //Admin
     public IActionResult Detail(int id) 
 	{

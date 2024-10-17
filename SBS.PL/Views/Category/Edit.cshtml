@@ -9,20 +9,9 @@
 <form asp-action="Edit" enctype="multipart/form-data">
 
     <partial name="_CreateEditCategoryPartial"></partial>
-    <img src="~/images/@Model.PhotoName" class="mt-4 mb-4 rounded-1" height="300px"  />
+    <img src="~/files/images/@Model.PhotoName" height="300" class="mt-4 mb-4 rounded-3" />
     <br />
     <input class="btn btn-primary" type="submit" value="Edit" />
-    <a class="btn btn-secondary" asp-action="Index" asp-controller="Category" value="Cancel">Cancel</a>
-
-    </div>
-    <div class="form-group" hidden>
-        <input class="form-control" asp-for="PhotoName" />
-    </div>
-
-    </div>
-    <div class="form-group" hidden>
-        <input class="form-control" asp-for="CategoryId" />
-    </div>
 </form>
 <partial name="_ValidationScriptsPartial"></partial>
 

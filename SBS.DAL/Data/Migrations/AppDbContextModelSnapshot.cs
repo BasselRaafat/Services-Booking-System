@@ -115,6 +115,7 @@ namespace BookingService.DAL.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BasePrice")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CategoryId")
@@ -131,7 +132,7 @@ namespace BookingService.DAL.Data.Migrations
                     b.Property<string>("PhotoName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ServiceCategoryId")
+                    b.Property<int>("ServiceCategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

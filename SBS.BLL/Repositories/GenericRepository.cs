@@ -22,14 +22,14 @@ public class GenericRepository<T> : IGenericRepository<T> where T : ModelsBase
 		_dbContext.Add(entity);
 	}
 
-	public void Delete(T entity)
+	public void delete(T entity)
 	{
 		_dbContext.Set<T>().Remove(entity);
 	}
 
-	public async Task<T> GetById(int id)
+	public  T GetById(int id)
 	{
-		return  await _dbContext.FindAsync<T>(id);
+		return  _dbContext.Find<T>(id);
 
 	}
 
