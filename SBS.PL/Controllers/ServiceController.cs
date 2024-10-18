@@ -7,6 +7,7 @@ using System.Globalization;
 
 namespace Services_Booking_System.Controllers
 {
+    [Route("service")]
     public class ServiceController : Controller
     {
         AppDbContext context;
@@ -20,7 +21,7 @@ namespace Services_Booking_System.Controllers
         {
             return View();
         }
-        [Route("{ServiceId}")]
+        [Route("ServiceDetails/{ServiceId:int}")]
         public IActionResult ServiceDetails([FromRoute] int ServiceId, string sortBy = "recommended", decimal? minPrice = null, decimal? maxPrice = null)
         {
             //ServiceId = 1;
