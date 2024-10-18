@@ -20,10 +20,10 @@ namespace Services_Booking_System.Controllers
         {
             return View();
         }
-
-        public IActionResult ServiceDetails(string sortBy = "recommended", decimal? minPrice = null, decimal? maxPrice = null)
+        [Route("{ServiceId}")]
+        public IActionResult ServiceDetails([FromRoute] int ServiceId, string sortBy = "recommended", decimal? minPrice = null, decimal? maxPrice = null)
         {
-            int ServiceId = 3;
+            //ServiceId = 1;
             if (!ModelState.IsValid)
             {
                 return View(ModelState);
@@ -47,7 +47,7 @@ namespace Services_Booking_System.Controllers
                     TechnicianAddress = tech.Address,
                     TechnicianDescription = tech.Bio,
                     TechnicianImageUrl = tech.ImageUrl,
-                    TechnicianName = tech.Name,
+                    TechnicianName = tech.FirstName + " " + tech.LastName,
                     TechnicianPrice = (decimal)tech.Price,
                     TechnicianReview = averageRating,
                 });
@@ -84,7 +84,7 @@ namespace Services_Booking_System.Controllers
                 case "3": // Rating
                     serviceProviders = serviceProviders.OrderByDescending(sp => sp.TechnicianReview).ToList();
                     break;
-                default: 
+                default:
                     break;
             }
             /////
@@ -96,7 +96,7 @@ namespace Services_Booking_System.Controllers
                 ServiceDescription = serviceDb.Description,
                 ServiceProviders = serviceProviders
             };
-            
+
             return View(serviceDetails);
         }
 

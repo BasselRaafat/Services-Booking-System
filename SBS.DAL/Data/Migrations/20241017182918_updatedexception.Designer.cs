@@ -4,6 +4,7 @@ using BookingService.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingService.DAL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241017182918_updatedexception")]
+    partial class updatedexception
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,6 +118,7 @@ namespace BookingService.DAL.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BasePrice")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CategoryId")
@@ -131,7 +135,7 @@ namespace BookingService.DAL.Data.Migrations
                     b.Property<string>("PhotoName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ServiceCategoryId")
+                    b.Property<int>("ServiceCategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -156,6 +160,9 @@ namespace BookingService.DAL.Data.Migrations
                     b.Property<string>("Bio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("BookingId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("BookingNumber")
                         .HasColumnType("int");
@@ -198,11 +205,8 @@ namespace BookingService.DAL.Data.Migrations
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(2,1)");
 
-                    b.Property<DateTime>("StartTo")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Startfrom")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("ReviewId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
