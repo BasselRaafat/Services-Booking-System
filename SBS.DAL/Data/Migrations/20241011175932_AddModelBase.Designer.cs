@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BookingService.DAL.Migrations
+namespace BookingService.DAL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241016145718_intial")]
-    partial class intial
+    [Migration("20241011175932_AddModelBase")]
+    partial class AddModelBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,9 +149,6 @@ namespace BookingService.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhotoName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Category");
@@ -236,6 +233,9 @@ namespace BookingService.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
                     b.Property<int>("BookingNumber")
                         .HasColumnType("int");
 
@@ -271,8 +271,11 @@ namespace BookingService.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Rating")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ReviewId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
