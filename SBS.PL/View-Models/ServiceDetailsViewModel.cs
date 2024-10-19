@@ -12,7 +12,6 @@ namespace Services_Booking_System.View_Models
 
     public class ServiceProviderViewModel
     {
-        public int TechnicianId { get; set; }
         public string TechnicianName { get; set; }
         public string TechnicianDescription { get; set; }
         public string TechnicianAddress {  get; set; }

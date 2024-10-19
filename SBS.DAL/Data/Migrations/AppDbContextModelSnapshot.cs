@@ -192,6 +192,9 @@ namespace BookingService.DAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(2,1)");
 
@@ -213,9 +216,6 @@ namespace BookingService.DAL.Data.Migrations
 
                     b.Property<int>("TechnicianId")
                         .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
 
                     b.Property<int>("StartingPrice")
                         .HasColumnType("int");

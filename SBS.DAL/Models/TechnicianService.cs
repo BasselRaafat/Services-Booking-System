@@ -14,7 +14,6 @@ public class TechnicianService
 
     public int StartingPrice { get; set; }
 
-    public double Price { get; set; }
     public Technician Technician { get; set; }
     public Service Service { get; set; }
 }
