@@ -17,7 +17,6 @@ public class Technician : ModelsBase
     public DateTime Startfrom { get; set; }
     public DateTime StartTo { get; set; }
     public string Address { get; set; }
-    public double Price { get; set; }
     public decimal Rating { get; set; }
     public ICollection<Review> Reviews { get; set; }
     public ICollection<Booking> Bookings { get; set; }

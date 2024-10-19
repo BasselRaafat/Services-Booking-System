@@ -115,3 +115,39 @@ img {
     width: 100px; /* Set your desired width */
     height: auto; /* Maintain aspect ratio */
 }
+
+
+
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.card-body img {
+    border-radius: 50%;
+    width: 150px;
+}
+
+.list-group-item {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+.text-muted {
+    font-size: 0.9rem;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+

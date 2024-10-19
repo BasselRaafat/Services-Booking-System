@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 d-flex align-items-center justify-content-end">
-                            <button class="btn btn-success w-75 h-100" asp-controller="Technician" asp-action="Profile">Select & Continue</button>
+                            <a class="btn btn-success w-75 h-100 text-center" href="@Url.Action("technicalProfile", "Account", new { id = technician.TechnicianId })">Select & Continue</a>
                         </div>
                     </div>
                 </div>
