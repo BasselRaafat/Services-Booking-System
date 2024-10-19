@@ -1,12 +1,22 @@
-﻿@model IQueryable<Service>
+﻿@model IEnumerable<Service>
 @inject ICategoryRepository _categoryRepo
 @{
     ViewData["Title"] = "Index";
-    IEnumerable<Service> services = Model; 
-    Category category = await _categoryRepo.GetById(ViewBag.CategoryId);
+    IEnumerable<Service> services = Model;
+    string categoryName;
+    Category category=null;
+    if(ViewBag.CategoryId is null)
+    {
+        categoryName = "All Categoies";
+    }
+    else
+    {
+        category = await _categoryRepo.GetById(ViewBag.CategoryId);
+        categoryName = category.Name;
+    }
 
 }
-<h1>@category.Name</h1>
+<h1>@categoryName</h1>
 @foreach (var service in services)
 {
     <div class="container mt-4">
@@ -31,7 +41,17 @@
     </div>
 }
 
-<div>
+@if (category is null)
+{
+    <div>
+        <a asp-action="Create" class="btn-primary btn">Create</a>
+    </div>
+
+}
+else
+{
+    <div>
     <a asp-action="Create" class="btn-primary btn" asp-route-id="@category.Id">Create</a>
-</div>
+    </div>
+}
 

@@ -17,9 +17,10 @@ public static class Files
 
         // 4. Save File as Streams[Data Per Time]
 
-        var fileStream = new FileStream(filePath, FileMode.Create);
-
-        file.CopyTo(fileStream);
+        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        {
+            file.CopyTo(fileStream);
+        }
 
         return fileName;//To Store in database
     }

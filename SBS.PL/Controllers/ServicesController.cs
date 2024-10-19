@@ -14,12 +14,19 @@ public class ServicesController : Controller
     {
         _serviceRepo = serviceRepo;
     }
-    public IActionResult Index(int id)
+    public async Task<IActionResult> IndexAsync(int? id)
     {
-        var services =_serviceRepo.GetByCategoryId(id);
-        ViewBag.CategoryId = id;
-        return View(services);
-    }
+        if (id is null)
+        {
+            var servicess = await _serviceRepo.GetAll();
+            return View(servicess);
+        }
+        
+            var services = _serviceRepo.GetByCategoryId(id.Value) as IEnumerable<Service>;
+            ViewBag.CategoryId = id;
+            return View(services);
+        
+        }
 
     [HttpGet]
     public IActionResult Create(int? id)
@@ -101,4 +108,6 @@ public class ServicesController : Controller
     {
         return View();
     }
+
+   
 }
