@@ -1,0 +1,42 @@
+﻿@inject ICategoryRepository _categoryRepo
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "_Layout";
+    var Categories = await _categoryRepo.GetAll();
+}
+
+
+<section class="hero-section position-relative">
+    <img src="~/images/xabvokgynbkytiuukhqq.png" class="img-fluid pb-5" alt="Hero Image" style="width:100vw">
+    <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
+        <h1 class="text-white fw-bold">Your to-do list is on us.</h1>
+    </div>
+</section>
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var Category in Categories)
+        {
+            <div class="col-md-6 mb-4 d-flex align-items-stretch">
+                <div class="card" style="width: 100%; height: 100%;">
+                <img src="~/images/@Category.PhotoName" class="card-img-top" style="height: 250px; object-fit: cover;" alt="@Category.Name" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">@Category.Name</h5>
+                    <a asp-controller="Services" asp-action="Index" asp-route-id="@Category.Id" class="btn btn-success">
+                        View Services
+                    </a>
+                        <a  asp-action="Edit" asp-route-id="@Category.Id" class="btn btn-info">
+                            Edit
+                        </a>
+                    <form asp-action="Delete" asp-route-id="@Category.Id" style="display:inline">
+                        <input class="btn btn-danger" type="submit" value="Delete" />
+                    </form>
+                </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<a asp-action="Create" class="btn btn-dark">Create</a>

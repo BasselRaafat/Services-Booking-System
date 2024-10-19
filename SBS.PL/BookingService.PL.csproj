@@ -8,10 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Categories\**" />
-    <Content Remove="Views\Categories\**" />
-    <EmbeddedResource Remove="Views\Categories\**" />
-    <None Remove="Views\Categories\**" />
+    <None Include="Views\Category\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Service\ServiceDetails.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SBS.BLL\BookingService.BLL.csproj" />
+    <ProjectReference Include="..\SBS.DAL\BookingService.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\" />
   </ItemGroup>
 
 </Project>
