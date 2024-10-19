@@ -43,9 +43,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : ModelsBase
 	{
 		_dbContext.Set<T>().Update(entity);
 	}
+    public async Task<int> CountAllAsync()
+    {
+        return await _dbContext.Set<T>().CountAsync();
+    }
 	public int Save()
 	{
 		return _dbContext.SaveChanges();
 	}
-	
+
 }

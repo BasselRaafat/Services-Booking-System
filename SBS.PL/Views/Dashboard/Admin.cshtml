@@ -1,0 +1,119 @@
+﻿@* @using WEBPage.Models.Identity
+@model IList<ApplicationUser>
+
+<table class="table table-hover table-bordered">
+    <tr>
+        
+        <td>Name</td>
+        <td>Email</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+    <tr> 
+        @foreach(var item in Model)
+        {
+            
+            <td>@(@item.FirstName+ " " + item.LastName)</td>
+            <td>@item.Email</td>
+            <td><a asp-action="EditAdmin">Edit</a></td>
+            <td><a asp-action="DeleteAdmin">Delete</a></td>
+        }
+    </tr>
+</table> *@
+@using WEBPage.Models.Identity
+@model IList<ApplicationUser>
+
+<style>
+    table {
+        width: 100%; /* Full width table */
+        font-size: 18px; /* Increased font size for readability */
+        border-collapse: separate; /* Prevent collapsing borders */
+        border-spacing: 0 10px; /* Add space between rows */
+    }
+
+    th, td {
+        padding: 15px 20px; /* Add padding for more space in cells */
+        text-align: left; /* Left align text for better readability */
+    }
+
+    /* First row (header) styling */
+    tr:first-of-type {
+        background-color: #0d7a5f; /* Green background for first row */
+        color: white; /* White text for contrast */
+        font-weight: bold; /* Make the text bold */
+    }
+
+        tr:first-of-type th {
+            padding: 20px 25px; /* More padding for the header cells */
+            border-right: 2px solid white; /* Add space between header columns */
+            font-size: 20px; /* Larger font size for the header */
+        }
+
+    th:last-child, td:last-child {
+        border-right: none; /* No right border on the last column */
+    }
+
+    /* Links styling (Edit and Delete) */
+    a.edit-link, a.delete-link {
+        text-decoration: none; /* Remove underline */
+        display: inline-flex; /* Display as inline flex for icon alignment */
+        align-items: center; /* Vertically center text and icon */
+    }
+
+
+    /* Delete link styling */
+    a.delete-link {
+        color: red; /* Red delete link */
+        font-weight: bold;
+    }
+
+        a.delete-link:hover {
+            color: darkred; /* Darker red on hover */
+        }
+
+    /* Add subtle shadow to table */
+    table {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    }
+
+    /* Button styling */
+    .btn-add {
+        background-color: #0d7a5f; /* Button background */
+        color: white; /* Button text color */
+        border: none; /* Remove border */
+        padding: 10px 20px; /* Button padding */
+        font-size: 18px; /* Font size */
+        margin-top: 15px; /* Space above the button */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        display: inline-block;
+    }
+
+        .btn-add:hover {
+            background-color: #0b6a53; /* Darker green on hover */
+        }
+
+</style>
+
+<table >
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(@item.FirstName + " " + item.LastName)</td>
+            <td>@item.Email</td>
+            <td><a asp-action="Edit" class="edit-link">Edit</a></td>
+            <td><a asp-action="Delete" asp class="delete-link">Delete</a></td>
+        </tr>
+    }
+</table>
+
+<!-- Button for adding a new admin -->
+<button class="btn-add" onclick="location.href='@Url.Action("AddAdmin")'">Add New Admin</button>
+
+</table>
+
