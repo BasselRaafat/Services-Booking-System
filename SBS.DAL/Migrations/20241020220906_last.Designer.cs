@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BookingService.DAL.Data.Migrations
+namespace BookingService.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241016225801_makeNullableV2")]
-    partial class makeNullableV2
+    [Migration("20241020220906_last")]
+    partial class last
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -160,9 +160,6 @@ namespace BookingService.DAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("BookingId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("BookingNumber")
                         .HasColumnType("int");
 
@@ -198,11 +195,17 @@ namespace BookingService.DAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(2,1)");
 
-                    b.Property<int?>("ReviewId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("StartTo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Startfrom")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -217,8 +220,8 @@ namespace BookingService.DAL.Data.Migrations
                     b.Property<int>("TechnicianId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StartingPrice")
-                        .HasColumnType("int");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.HasKey("ServiceId", "TechnicianId")
                         .HasName("TechnicianService_PK");
