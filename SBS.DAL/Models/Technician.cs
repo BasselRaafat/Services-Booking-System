@@ -18,12 +18,6 @@ public class Technician : ModelsBase
 
 
     public string Address { get; set; }
-
-    public double Price { get; set; }
-
-    //public int ReviewId { get; set; }
-    //public int BookingId { get; set; }
-
     public decimal Rating { get; set; }
     public string Address { get; set; }
     public int? ReviewId { get; set; }

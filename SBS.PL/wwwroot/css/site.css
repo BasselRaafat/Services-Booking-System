@@ -1,42 +1,46 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 
 
 
-main{
-    margin-top:100px;
-    margin-bottom:70px;
+main {
+    margin-top: 100px;
+    margin-bottom: 70px;
 }
+
 .main-Text {
     font-size: 55px;
-    line-height:77px;
+    line-height: 77px;
     color: #0a2b14;
-    font-weight:700;
+    font-weight: 700;
 }
+
 .search .input-group {
     background-color: #ffffff;
 }
+
 .search button {
     background-color: #0d7a5f;
-    padding : 10px 20px; 
+    padding: 10px 20px;
 }
+
     .search button:hover {
         transition: background-color 0.3s, color 0.3s;
         background-color: #055240;
@@ -46,6 +50,7 @@ main{
 .search .input-group input {
     padding: 10px 30px;
 }
+
 .service-list {
     display: flex;
     justify-content: center;
@@ -77,6 +82,7 @@ main{
     max-width: 775px;
     width: 100%;
 }
+
 #service-details .service-link {
     border-radius: 50px; /* More circular buttons */
     transition: background-color 0.3s, color 0.3s;
@@ -115,3 +121,38 @@ img {
     width: 100px; /* Set your desired width */
     height: auto; /* Maintain aspect ratio */
 }
+
+
+
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.card-body img {
+    border-radius: 50%;
+    width: 150px;
+}
+
+.list-group-item {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+.text-muted {
+    font-size: 0.9rem;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+    .btn-success:hover {
+        background-color: #218838;
+    }

@@ -2,6 +2,7 @@
 using BookingService.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Services_Booking_System.View_Models;
 using System.Globalization;
 
@@ -29,7 +30,9 @@ namespace Services_Booking_System.Controllers
                 return View(ModelState);
             }
             var serviceDb = context.Service.FirstOrDefault(x => x.Id == ServiceId);
-            var technicianDb = context.Technician.Where(t => t.TechnicianService.Any(ts => ts.ServiceId == ServiceId)).ToList();
+            var technicianDb = context.Technician
+                .Include(t => t.TechnicianService)
+                .Where(t => t.TechnicianService.Any(ts => ts.ServiceId == ServiceId)).ToList();
             if (serviceDb == null || technicianDb == null)
             {
                 return View(ModelState);
@@ -37,19 +40,24 @@ namespace Services_Booking_System.Controllers
             var serviceProviders = new List<ServiceProviderViewModel>();
             foreach (var tech in technicianDb)
             {
-                var reviews = context.Review.Where(r => r.TechnicianId == tech.Id).ToList();
-                int reviewsCount = reviews.Any() ? reviews.Count : 0;
-                decimal averageRating = (decimal)((reviewsCount > 0) ? Math.Round(reviews.Average(r => r.Rating), 2) : 0);
+                //var reviews = context.Review.Where(r => r.TechnicianId == tech.Id).ToList();
+                //int reviewsCount = reviews.Any() ? reviews.Count : 0;
+                //decimal averageRating = (decimal)((reviewsCount > 0) ? Math.Round(reviews.Average(r => r.Rating), 2) : 0);
+
+                decimal technicianPrice = tech.TechnicianService != null
+                    ? Convert.ToDecimal(tech.TechnicianService.Select(x => x.Price).FirstOrDefault())
+                    : 0;
 
                 serviceProviders.Add(new ServiceProviderViewModel
                 {
-                    ReviewsNum = reviewsCount,
+                    TechnicianId = tech.Id,
+                    ReviewsNum = 20,
                     TechnicianAddress = tech.Address,
                     TechnicianDescription = tech.Bio,
                     TechnicianImageUrl = tech.ImageUrl,
-                    TechnicianName = tech.Name,
-                    TechnicianPrice = (decimal)tech.Price,
-                    TechnicianReview = averageRating,
+                    TechnicianName = tech.FirstName + " " + tech.LastName,
+                    TechnicianPrice = technicianPrice,
+                    TechnicianReview = 4,
                 });
             }
 

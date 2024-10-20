@@ -12,7 +12,8 @@ public class TechnicianService
     [ForeignKey("Technician")]
     public int TechnicianId { get; set; }
 
-    public int StartingPrice { get; set; }
+    public double Price { get; set; }
+
 
     public Technician Technician { get; set; }
     public Service Service { get; set; }
