@@ -28,8 +28,4 @@
     <ProjectReference Include="..\SBS.DAL\BookingService.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Shared\" />
-  </ItemGroup>
-
 </Project>

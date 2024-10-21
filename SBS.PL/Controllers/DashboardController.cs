@@ -1,12 +1,15 @@
 ﻿using BookingService.BLL.Repositories;
 using BookingService.DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PagedList;
 using Services_Booking_System.View_Models;
 using WEBPage.Models.Identity;
 
 namespace Services_Booking_System.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class DashboardController : Controller
     {
         private readonly UserRepository userRepository;
@@ -18,8 +21,8 @@ namespace Services_Booking_System.Controllers
         private readonly RoleManager<ApplicationRole> roleManager;
 
 
-        public DashboardController(UserRepository userRepository,TechnicianRepository technicianRepository
-            ,CategoryRepository categoryRepository,ServiceRepository serviceRepository, BookingRepository bookingRepository,
+        public DashboardController(UserRepository userRepository, TechnicianRepository technicianRepository
+            , CategoryRepository categoryRepository, ServiceRepository serviceRepository, BookingRepository bookingRepository,
             UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             this.userRepository = userRepository;
@@ -41,18 +44,15 @@ namespace Services_Booking_System.Controllers
             dashboardViewModel.ServicesCount = await serviceRepository.CountAllAsync();
             dashboardViewModel.NumberOfBookings = await bookingRepository.CountAllAsync();
 
-            return View("Index",dashboardViewModel);            
+            return View("Index", dashboardViewModel);
         }
         public async Task<IActionResult> Admin()
         {
             IList<ApplicationUser> AdminList = await userManager.GetUsersInRoleAsync("Admin");
 
-            return View("Admin",AdminList);
+            return View("Admin", AdminList);
         }
-        public  IActionResult EditUser()
-        {
-            return View();
-        }
+
         public IActionResult DeleteUser()
         {
             return View();
@@ -73,13 +73,13 @@ namespace Services_Booking_System.Controllers
                 user.Email = addAdminViewModel.Email;
                 user.UserName = addAdminViewModel.Email;
                 var identityresult = await userManager.CreateAsync(user, addAdminViewModel.Password);
-                if(!identityresult.Succeeded)
+                if (!identityresult.Succeeded)
                 {
-                    foreach(var item in identityresult.Errors)
+                    foreach (var item in identityresult.Errors)
                     {
                         ModelState.AddModelError("", item.Description);
                     }
-                    return View("AddAdmin",addAdminViewModel);
+                    return View("AddAdmin", addAdminViewModel);
                 }
                 await userManager.AddToRoleAsync(user, "Admin");
                 return RedirectToAction("Index");
@@ -99,11 +99,33 @@ namespace Services_Booking_System.Controllers
             var result = await userManager.DeleteAsync(user);
             if (result.Succeeded)
             {
+
                 return Ok($"User with email {email} deleted successfully.");
             }
 
             return BadRequest("Error occurred while deleting the user.");
         }
+        public async Task<IActionResult> Technicians(int page = 1, int pageSize = 10)
+        {
+            var technicians = await userManager.GetUsersInRoleAsync("Technician");
+
+            // Calculate total count and pages
+            var totalItems = technicians.Count;
+            var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            // Fetch the items for the current page
+            var techniciansPaged = technicians
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            // Prepare data for view
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View("Technicians", techniciansPaged);
+        }
+
 
     }
 }
