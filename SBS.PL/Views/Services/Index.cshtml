@@ -37,9 +37,9 @@
                 <h4>@service.Name</h4>
                 <p>@service.Description</p>
                 <a  asp-controller="Service" asp-action="ServiceDetails" asp-route-id="@service.Id" class="book-now-button">Book Now</a>
-                <form asp-action="Delete" asp-route-id="@service.Id" method="post" class="d-inline">
+               @*  <form asp-action="Delete" asp-route-id="@service.Id" method="post" class="d-inline">
                     <input class="delete-button" type="submit" value="Delete" id="myButton" />
-                </form>
+                </form> *@
             </div>
         </div>
     }
