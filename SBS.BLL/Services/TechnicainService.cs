@@ -12,7 +12,7 @@ namespace BookingService.BLL.Services
 {
     public class TechnicianServices
     {
-        public TechnicianRepository TechnicianRepository { get; }
+        public TechnicianRepository TechnicianRepository { get; set; }
         public TechnicianServices(TechnicianRepository technicianRepository)
         {
             TechnicianRepository = technicianRepository;

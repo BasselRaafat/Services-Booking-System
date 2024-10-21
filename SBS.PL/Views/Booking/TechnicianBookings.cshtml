@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Booking>
+@{
+    var statusOptions = new List<string> { "Pending", "Accepted And In Progress", "Missed", "Done" };
+    var StatusList = new SelectList(statusOptions);
+}
+
+<h1>Your Bookings</h1>
+<div class="container mt-5">
+    <!-- Filter by Status -->
+    <form method="get" asp-action="TechnicianBookings" class="mt-5 mb-5">
+        <label for="statusFilter" class="col-auto col-form-label" style="font-size:20px;">Filter by Status</label>
+        <div class="form-group row align-items-center">
+            <div class="col-auto">
+                <select class="form-control" id="statusFilter" name="statusFilter" style="width: 200px;">
+                    <option value="">All</option>
+                    @foreach (var status in statusOptions)
+                    {
+                        @if (ViewBag.StatusFilter == status)
+                        {
+                            <option value="@status" selected>@status</option>
+                        }
+                        else
+                        {
+                            <option value="@status">@status</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Display Bookings -->
+    <div class="row">
+        @foreach (var booking in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Booking ID: @booking.Id</h5>
+                        <p class="card-text">
+                            <strong>Date:</strong> @booking.Date.ToString("yyyy-MM-dd HH:mm")<br />
+                            <strong>Status:</strong> @booking.Status<br />
+
+                            @if (booking.TotalPrice is not null)
+                            {
+                                <strong>Total Price:</strong>
+                                @string.Join(" ", "$", @booking.TotalPrice) <br />
+                            }
+                            <strong>User Name:</strong> @string.Join(" ", booking.User?.FirstName, booking.User?.LastName)<br />
+                            <strong>Address:</strong> @string.Join(" - ", booking.User?.City, booking.User?.Address)<br />
+                        </p>
+
+                        <!-- Update Status Form -->
+                        <form method="post" asp-action="UpdateBookingStatus">
+                            <input type="hidden" name="bookingId" value="@booking.Id" />
+                            <div class="form-group">
+                                <label for="newStatus">Update Status</label>
+                                <select class="form-control" id="newStatus" name="newStatus">
+                                    @foreach (var status in statusOptions)
+                                    {
+                                        @if (status == booking.Status)
+                                        {
+                                            <option value="@status" selected>@status</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@status">@status</option>
+                                        }
+                                    }
+                                </select>
+                                @if (booking.TotalPrice is null && booking.Status != "Missed")
+                                {
+                                    <div class="form-group">
+                                        <label for="price" class="form-label">Total Price</label>
+                                        <input name="price" class="form-control" />
+                                    </div>
+                                }
+                            </div>
+                            <button type="submit" class="btn btn-success mt-2">Update Status</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

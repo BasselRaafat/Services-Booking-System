@@ -69,7 +69,7 @@ public class ServicesController : Controller
 
         if (serv is not null)
         {
-            var service = new ServiceViewModel()
+            var service = new EditServicesViewModel()
             {
                 Id = serv.Id,
                 Name = serv.Name,
@@ -82,20 +82,37 @@ public class ServicesController : Controller
         return BadRequest("Not Found");
     }
     [HttpPost]
-    public IActionResult Edit(ServiceViewModel service)
+    public IActionResult Edit(EditServicesViewModel service)
     {
+        /*
+			string photoname;
+			if (service.PhotoName is not null && service.Photo is not null)
+			{
+				Files.DeleteFile(service.PhotoName, "Images");
+			}
+			if( service.Photo is not null)
+				photoname = Files.UploadFile(service.Photo, "images");
+        	else
+				photoname=service.PhotoName;
+         */
         if (ModelState.IsValid) 
         {
-            if (service.PhotoName is not null)
+            string photoname;
+            if (service.PhotoName is not null && service.Photo is not null)
+            {
                 Files.DeleteFile(service.PhotoName, "Images");
-            var picName =Files.UploadFile(service.Photo, "Images");
+            }
+            if (service.Photo is not null)
+                photoname = Files.UploadFile(service.Photo, "images");
+            else
+                photoname = service.PhotoName;
             var mappedService = new Service() 
             {
                 Id = service.Id,
                 Name = service.Name,
                 Description = service.Description,
                 CategoryId = service.CategoryId,
-                PhotoName = picName
+                PhotoName = photoname
             };
             _serviceRepo.Update(mappedService);
             _serviceRepo.Save();
@@ -104,10 +121,16 @@ public class ServicesController : Controller
         return View(service);
     }
 
-    public IActionResult Delete(int id) 
-    {
-        return View();
-    }
-
    
+      public async Task<IActionResult> Delete(int id)
+        {
+            Service ser= await _serviceRepo.GetById(id);
+         if (ser.PhotoName is not null)
+             Files.DeleteFile(ser.PhotoName, "Images");
+         if (ser == null) {  return View("Error"); }
+        _serviceRepo.Delete(ser); 
+            _serviceRepo.Save();
+         return RedirectToAction("Index");
+        }
+
 }

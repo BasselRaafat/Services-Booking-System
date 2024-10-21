@@ -9,4 +9,5 @@ namespace BookingService.BLL.Interfaces;
 
 public interface ITechnicianRepository : IGenericRepository<Technician>
 {
+    public Technician GetByEmail(string email);
 }

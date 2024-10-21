@@ -22,5 +22,7 @@ internal class BookingConfigurations : IEntityTypeConfiguration<Booking>
 			.WithMany(t => t.Bookings)
 			.HasForeignKey(b => b.TechnicianID)
 			.HasConstraintName("Booking_Technician_FK");
-	}
+        builder.Property(b => b.TotalPrice)
+                .HasColumnType("decimal(4,2)");
+    }
 }

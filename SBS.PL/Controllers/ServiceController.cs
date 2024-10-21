@@ -46,6 +46,7 @@ namespace Services_Booking_System.Controllers
 
                 serviceProviders.Add(new ServiceProviderViewModel
                 {
+                    Id = tech.Id,
                     ReviewsNum = reviewsCount,
                     TechnicianAddress = tech.Address,
                     TechnicianDescription = tech.Bio,

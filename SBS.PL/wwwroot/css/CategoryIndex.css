@@ -1,0 +1,44 @@
+﻿.hero-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.category-card {
+    transition: transform 0.2s;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .category-card:hover {
+        transform: scale(1.03);
+    }
+
+.card-body .btn {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+    .card-body .btn:last-child {
+        margin-bottom: 0;
+    }
+
+.btn-dark, .btn-info, .btn-success, .btn-danger {
+    width: 100%;
+}
+
+.container .row {
+    justify-content: left;
+}
+.container {
+    padding-left: 0px;
+    padding-right:0px;
+}
+@media (max-width: 767px) {
+    .category-card {
+        margin-bottom: 20px;
+    }
+}

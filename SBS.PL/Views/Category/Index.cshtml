@@ -4,7 +4,9 @@
     Layout = "_Layout";
     var Categories = await _categoryRepo.GetAll();
 }
-
+@section Styles {
+    <link href="~/css/CategoryIndex.css" rel="stylesheet" />
+}
 
 <section class="hero-section position-relative">
     <img src="~/images/xabvokgynbkytiuukhqq.png" class="img-fluid pb-5" alt="Hero Image" style="width:100vw">
@@ -12,31 +14,53 @@
         <h1 class="text-white fw-bold">Your to-do list is on us.</h1>
     </div>
 </section>
+<br />
 
-
-<div class="container">
+<a asp-action="Create" class="btn btn-primary mt-md-1">Create</a>
+<div class="container my-5">
     <div class="row">
         @foreach (var Category in Categories)
         {
-            <div class="col-md-6 mb-4 d-flex align-items-stretch">
-                <div class="card" style="width: 100%; height: 100%;">
-                <img src="~/images/@Category.PhotoName" class="card-img-top" style="height: 250px; object-fit: cover;" alt="@Category.Name" />
-                <div class="card-body text-center">
-                    <h5 class="card-title">@Category.Name</h5>
-                    <a asp-controller="Services" asp-action="Index" asp-route-id="@Category.Id" class="btn btn-success">
-                        View Services
-                    </a>
-                        <a  asp-action="Edit" asp-route-id="@Category.Id" class="btn btn-info">
-                            Edit
-                        </a>
-                    <form asp-action="Delete" asp-route-id="@Category.Id" style="display:inline">
-                        <input class="btn btn-danger" type="submit" value="Delete" />
-                    </form>
-                </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
+                <div class="card category-card" style="width: 100%;">
+                    <img src="~/images/@Category.PhotoName" class="card-img-top" style="height: 250px; object-fit: cover;"
+                    alt="@Category.Name" />
+                    <div class="card-body text-center d-flex flex-column">
+                        <a class="card-title mb-3 " asp-controller="Services" asp-action="Index" asp-route-id="@Category.Id"
+                        style="text-decoration:none;color:#0d7a5f; font-size:20px">@Category.Name</a>
+                        <div class="mt-auto">
+
+                            <a asp-action="Edit" asp-route-id="@Category.Id" class="btn btn-warning mb-2">
+                                Edit
+                            </a>
+                            <form asp-action="Delete" asp-route-id="@Category.Id" method="post" class="d-inline">
+                                <input class="btn btn-danger mb-2" type="submit" value="Delete" id="myButton" />
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        }
+                  }
     </div>
 </div>
+<style>
+    a:hover .card-title:hover {
+        color: #0b6650; /* Darker shade of the original color */
+        text-decoration: underline;
+    }
+  
+</style>
 
-<a asp-action="Create" class="btn btn-dark">Create</a>
+@section Scripts{
+<script>
+    document.querySelectorAll('#myButton').forEach(button => {
+        button.addEventListener('click', function (e) {
+            if (!confirm("Are you sure you want to delete this category?")) {
+                e.preventDefault();
+            }
+        });
+    });
+    console.log("Script loaded successfully");
+</script>
+}
+

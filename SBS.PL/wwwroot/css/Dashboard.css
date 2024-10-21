@@ -1,0 +1,149 @@
+﻿
+:root {
+    --bs-blue: #4154f1;
+    --bs-green: #2eca6a;
+    --bs-orange: #ff771d;
+    --sidebar-width: 300px;
+    --header-height: 60px;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--sidebar-width);
+    background: white;
+    box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+    padding-top: var(--header-height);
+    z-index: 996;
+    transition: all 0.3s;
+}
+
+.sidebar-nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+    .sidebar-nav .nav-item {
+        margin-bottom: 5px;
+    }
+
+    .sidebar-nav .nav-link {
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        color: #012970;
+        padding: 10px 15px;
+        border-radius: 4px;
+        transition: 0.3s;
+    }
+
+        .sidebar-nav .nav-link i {
+            font-size: 16px;
+            margin-right: 10px;
+            color: #899bbd;
+        }
+
+        .sidebar-nav .nav-link:hover {
+            background: #f6f9ff;
+            color: #4154f1;
+        }
+
+            .sidebar-nav .nav-link:hover i {
+                color: #4154f1;
+            }
+
+        .sidebar-nav .nav-link.active {
+            background: #f6f9ff;
+            color: #4154f1;
+        }
+
+            .sidebar-nav .nav-link.active i {
+                color: #4154f1;
+            }
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    height: var(--header-height);
+    background: white;
+    box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+    z-index: 995;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* Main Content Styles */
+.main {
+    margin-left: var(--sidebar-width);
+    padding: 80px 20px 20px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1.25rem rgb(108 118 134 / 10%);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-card .icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #012970;
+    font-family: "Nunito", sans-serif;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.card-title {
+    color: #012970;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.card-value {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #012970;
+    margin-bottom: 0.5rem;
+}
+
+.breadcrumb {
+    font-size: 0.875rem;
+}
+
+.page-title {
+    color: #012970;
+    font-size: 1.5rem;
+    font-weight: 600;
+}

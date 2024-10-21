@@ -4,54 +4,158 @@
     ViewData["Title"] = "Index";
     IEnumerable<Service> services = Model;
     string categoryName;
-    Category category=null;
-    if(ViewBag.CategoryId is null)
+    Category category = null;
+    if (ViewBag.CategoryId is null)
     {
-        categoryName = "All Categoies";
+        categoryName = "All Categories";
     }
     else
     {
         category = await _categoryRepo.GetById(ViewBag.CategoryId);
         categoryName = category.Name;
     }
-
 }
-<h1>@categoryName</h1>
-@foreach (var service in services)
-{
-    <div class="container mt-4">
-        <div class="card mb-3 shadow-sm align-content-between">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img src="~/images/@service.PhotoName" class="card-img rounded-3" alt="Door, Cabinet, and Furniture Repair">
-                </div>
-                <div class="col-md-8 flex ">
-                    <div class="card-body">
-                        <h4 class="card-title">@service.Name</h4>
-                        <p class="card-text">@service.Description</p>
-                        <div>
-                            <a asp-controller="Service" asp-action="ServiceDetails" asp-route-id="@service.Id" class="btn btn-success">Book Now</a>
-                            <a asp-action="Edit" asp-route-id="@service.Id" class="btn btn-dark">Edit</a>
-                        </div>
-                    </div>
 
-                </div>
+@* <h1>@categoryName</h1> *@
+@if(category is not null){
+    <section class="hero-section position-relative">
+        <img src="~/images/@category.PhotoName" class="img-fluid pb-5" alt="Hero Image" style="width:100vw; max-height:500px; object-fit:cover;">
+        <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
+            <h1 class="text-white fw-bold">@category.Name</h1>
+        </div>
+    </section>
+    <br />
+}
+<div class="services-container">
+    @foreach (var service in services)
+    {
+        <div class="service-card">
+            <div class="service-image">
+                <img src="~/images/@service.PhotoName" alt="@service.Name">
+            </div>
+            <div class="service-content">
+                <h4>@service.Name</h4>
+                <p>@service.Description</p>
+                <a  asp-controller="Service" asp-action="ServiceDetails" asp-route-id="@service.Id" class="book-now-button">Book Now</a>
+                <form asp-action="Delete" asp-route-id="@service.Id" method="post" class="d-inline">
+                    <input class="delete-button" type="submit" value="Delete" id="myButton" />
+                </form>
             </div>
         </div>
-    </div>
-}
+    }
 
-@if (category is null)
-{
-    <div>
-        <a asp-action="Create" class="btn-primary btn">Create</a>
-    </div>
+    @if (category is null)
+    {
+        <div>
+            <a asp-action="Create" class="create-button">Create</a>
+        </div>
+    }
+    else
+    {
+        <div>
+            <a asp-action="Create" class="create-button" asp-route-id="@category.Id">Create</a>
+        </div>
+    }
+</div>
 
-}
-else
-{
-    <div>
-    <a asp-action="Create" class="btn-primary btn" asp-route-id="@category.Id">Create</a>
-    </div>
-}
+<style>
+    /* Ensure consistent card layout and spacing */
+    .services-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Style for individual service cards */
+    .service-card {
+        display: flex;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        height: 200px; /* Adjusted card height */
+    }
+
+    /* Ensure all images are the same size */
+    .service-image {
+        flex: 0 0 220px; /* Increased width for better image display */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f8f8;
+    }
+
+        .service-image img {
+            width: 200px; /* Increased image width */
+            height: 200px; /* Increased image height */
+            border-radius: 50%; /* Circular images */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+
+    /* Style the content of the card */
+    .service-content {
+        padding: 20px;
+        flex: 1;
+    }
+
+        .service-content h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.5em; /* Increased font size */
+        }
+
+        .service-content p {
+            margin-bottom: 15px;
+            font-size: 1em; /* Increased font size */
+            color: #555;
+        }
+
+    /* Style for the button */
+    .book-now-button {
+        display: inline-block;
+        padding: 12px 24px; /* Increased button padding */
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+        .book-now-button:hover {
+            background-color: #218838;
+        }
+
+        .delete-button{
+        display: inline-block;
+        padding: 12px 24px; /* Increased button padding */
+        background-color: #DC143C;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        }
+
+    .delete:hover {
+        background-color: red;
+    }
+        /* Create button styling */
+    .create-button {
+        display: inline-block;
+        padding: 12px 24px; /* Increased button padding */
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+        .create-button:hover {
+            background-color: #0056b3;
+        }
+</style>
 

@@ -26,11 +26,19 @@ namespace BookingService.DAL
         public static void AddApplication(this IServiceCollection service,IConfiguration configuration)
         {
             service.AddScoped<UserRepository>();
+            service.AddScoped<TechnicianRepository>();
+            service.AddScoped<CategoryRepository>();
+            service.AddScoped<ServiceRepository>();
+            service.AddScoped<BookingRepository>();
             service.AddScoped<UserService>();
             service.AddScoped<TechnicianServices>();
             service.AddScoped<TechnicianRepository>();
             service.AddScoped<ICategoryRepository, CategoryRepository>();
             service.AddScoped<IServiceRepository, ServiceRepository>();
+            service.AddScoped<IBookingRepository, BookingRepository>();
+            service.AddScoped<IUserRepository,UserRepository>();
+            service.AddScoped<ITechnicianRepository, TechnicianRepository>();
+
         }
     }
 }

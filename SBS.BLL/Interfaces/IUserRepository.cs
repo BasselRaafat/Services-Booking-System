@@ -9,4 +9,5 @@ namespace BookingService.BLL.Interfaces;
 
 public interface IUserRepository : IGenericRepository<User>
 {
+    public User GetByEmail(string email);
 }

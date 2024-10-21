@@ -9,4 +9,6 @@ namespace BookingService.BLL.Interfaces;
 
 public interface IBookingRepository : IGenericRepository<Booking>
 {
+    public IEnumerable<Booking> GetWithUserId(int UserId);
+    public IEnumerable<Booking> GetWithTechId(int  TechId);
 }

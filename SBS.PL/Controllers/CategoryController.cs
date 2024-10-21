@@ -56,7 +56,7 @@ public class CategoryController : Controller
 	public async Task<IActionResult> Edit(int id)
 	{
 		var category = await _categoryRepo.GetById(id);
-		var categoryViewModel = new CategoryViewModel()
+		var categoryViewModel = new EditCategoryViewModel()
 		{
 			CategoryId = category.Id,
 			Name = category.Name,
@@ -66,13 +66,19 @@ public class CategoryController : Controller
 	}
  //Admin
  	[HttpPost]
-	public IActionResult Edit(CategoryViewModel _category)
+	public IActionResult Edit(EditCategoryViewModel _category)
 	{
 		if (ModelState.IsValid)
 		{
-			if (_category.PhotoName is not null)
+			string photoname;
+			if (_category.PhotoName is not null && _category.Photo is not null)
+			{
 				Files.DeleteFile(_category.PhotoName, "Images");
-			var photoname = Files.UploadFile(_category.Photo, "images");
+			}
+			if( _category.Photo is not null)
+				photoname = Files.UploadFile(_category.Photo, "images");
+			else
+				photoname=_category.PhotoName;
 			var category = new Category()
 			{
 				Id=_category.CategoryId,

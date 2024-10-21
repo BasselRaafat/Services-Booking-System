@@ -1,0 +1,49 @@
+﻿
+@model BookingViewModel
+@{
+    ViewData["Title"] = "Index";
+     var currentDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
+}
+
+<h1>Index</h1>
+
+<form asp-action="Book" method="post">
+    <div class="mb-3">
+        <label asp-for="Date" class="form-label"></label>
+        <input asp-for="Date" type="datetime-local" class="form-control" value="@currentDate"  />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+@*
+@@     <div class="mb-3">
+@@         <label asp-for="Status" class="form-label"></label>
+@@         <select asp-for="Status" class="form-select">
+@@             <option value="Pending">Pending</option>
+@@             <option value="In Progress">In Progress</option>
+@@             <option value="Missed">Missed</option>
+@@             <option value="Done">Done</option>
+@@         </select>
+@@         <span asp-validation-for="Status" class="text-danger"></span>
+@@     </div>
+*@
+
+    <input hidden asp-for="Status" value="Pending"/>
+  @*  <input hidden asp-for="TechnicianID" value="Pending"/>
+
+    <input hidden asp-for="UserID" value="Pending"/>
+  *@
+
+
+  @*  <div class="mb-3">
+        <label asp-for="TotalPrice" class="form-label"></label>
+        <input asp-for="TotalPrice" type="number" class="form-control" step="0.01" />
+        <span asp-validation-for="TotalPrice" class="text-danger"></span>
+    </div>
+    *@
+    <!-- Hidden field for UserID -->
+    <input asp-for="UserID" type="hidden" />
+
+    <!-- Hidden field for TechnicianID -->
+    <input asp-for="TechnicianID" type="hidden" />
+
+    <button type="submit" class="btn btn-primary">Book Appointment</button>
+</form>

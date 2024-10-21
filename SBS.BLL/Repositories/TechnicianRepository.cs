@@ -14,4 +14,9 @@ public class TechnicianRepository : GenericRepository<Technician> , ITechnicianR
 	public TechnicianRepository(AppDbContext dbcontext) : base(dbcontext)
 	{
 	}
+
+    public Technician GetByEmail(string email)
+    {
+        return _dbContext.Technician.Where(u => u.Email == email)?.FirstOrDefault();
+    }
 }

@@ -10,8 +10,8 @@ public class User : ModelsBase
     public string PhoneNumber { get; set; }
     public string City { get; set; }
     public string Address { get; set; }
-    public int BookingId { get; set; }
-    public int ReviewId { get; set; }
+    //public int BookingId { get; set; }
+    //public int ReviewId { get; set; }
     public ICollection<Booking> Bookings { get; set; }
     public ICollection<Review> Reviews { get; set; }
 }

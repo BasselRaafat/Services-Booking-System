@@ -1,10 +1,10 @@
 ﻿@using Azure.Core
 @using Services_Booking_System.View_Models
+@model ServiceDetailsViewModel
 @{
     ViewBag.Title = "Service Details";
 }
 
-@model ServiceDetailsViewModel
 
 <div class="container-fluid mt-4">
     <h1>
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 d-flex align-items-center justify-content-end">
-                            <button class="btn btn-success w-75 h-100" asp-controller="Technician" asp-action="Profile">Select & Continue</button>
+                            <a class="btn btn-success w-75 h-100" asp-controller="Booking" asp-action="Book" asp-route-technicianId="@technician.Id">Select & Continue</a>
                         </div>
                     </div>
                 </div>

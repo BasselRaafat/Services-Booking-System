@@ -1,18 +1,60 @@
-﻿@using Services_Booking_System.Controllers;
-@using Services_Booking_System.View_Models;
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model CategoryViewModel;
+﻿
+@model Services_Booking_System.View_Models.CategoryViewModel
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="text-center my-4">Create New Category</h1>
 
-<form asp-action="Create" enctype="multipart/form-data">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="form-label fw-bold"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter category name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
 
-    <partial name="_CreateEditCategoryPartial"></partial>
-        <br />
-    <input class="btn btn-primary" type="submit" value="Create" />
-</form>
-<partial name="_ValidationScriptsPartial" ></partial>
+                <div class="form-group mb-3">
+                    <label asp-for="Photo" class="form-label fw-bold"></label>
+                    <input asp-for="Photo" type="file" class="form-control" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
 
+                <div class="flex-column  align-items-center justify-content-center">
+                    <input type="submit" value="Create" class="btn btn-primary px-5" />
+                    <a id="kdsf" asp-action="Index" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<partial name="_ValidationScriptsPartial" />
+
+<style>
+    form {
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        form .form-label {
+            font-size: 1rem;
+        }
+
+       
+
+    .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #kdsf {
+        width: 100%;
+        margin-top: 10px;
+    }
+</style>
