@@ -6,11 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookingService.DAL.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:SBS.DAL/Migrations/20241021132737_init.cs
     public partial class init : Migration
-========
-    public partial class second : Migration
->>>>>>>> Dev:SBS.DAL/Migrations/20241021111945_second.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -109,13 +105,10 @@ namespace BookingService.DAL.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-<<<<<<<< HEAD:SBS.DAL/Migrations/20241021132737_init.cs
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
-========
+
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BookingId = table.Column<int>(type: "int", nullable: false),
                     ReviewId = table.Column<int>(type: "int", nullable: false)
->>>>>>>> Dev:SBS.DAL/Migrations/20241021111945_second.cs
                 },
                 constraints: table =>
                 {
@@ -238,10 +231,8 @@ namespace BookingService.DAL.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BasePrice = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhotoName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-<<<<<<<< HEAD:SBS.DAL/Migrations/20241021132737_init.cs
-========
+
                     ServiceCategoryId = table.Column<int>(type: "int", nullable: true),
->>>>>>>> Dev:SBS.DAL/Migrations/20241021111945_second.cs
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
