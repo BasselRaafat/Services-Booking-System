@@ -6,7 +6,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookingService.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+<<<<<<<< HEAD:SBS.DAL/Migrations/20241021133910_mohamed.cs
+    public partial class mohamed : Migration
+========
+    public partial class second : Migration
 >>>>>>>> 2d5c541618fd26e2b385d90b333206bca31fe299:SBS.DAL/Migrations/20241021111945_second.cs
     {
         /// <inheritdoc />
@@ -106,7 +109,6 @@ namespace BookingService.DAL.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BookingId = table.Column<int>(type: "int", nullable: false),
                     ReviewId = table.Column<int>(type: "int", nullable: false)
@@ -232,7 +234,6 @@ namespace BookingService.DAL.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BasePrice = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhotoName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-
                     ServiceCategoryId = table.Column<int>(type: "int", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -255,7 +256,7 @@ namespace BookingService.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(4,2)", nullable: true),
+                    TotalPrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: false),
                     TechnicianID = table.Column<int>(type: "int", nullable: false)
                 },
