@@ -1,0 +1,51 @@
+﻿@model AddAdminViewModel
+<section class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="card shadow-lg bg-white" style="
+        width: 90%; /* Take most of the page */
+        max-width: 500px; /* Max width */
+        ">
+        <div class="card-body py-5 px-md-5">
+
+            <h2 class="fw-bold mb-5 text-center">Create Admin</h2>
+            <form asp-action="AddAdmin" method="post">
+                <!-- First Name input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="FirstName" class="form-control" asp-for="FirstName" required />
+                    <label class="form-label" for="FirstName">First Name</label>
+                </div>
+                <!-- Last Name input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="LastName" class="form-control" asp-for="LastName" required />
+                    <label class="form-label" for="LastName">Last Name</label>
+                </div>
+                <!-- Email input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="email" id="form3Example1" class="form-control" asp-for="Email" required />
+                    <label class="form-label" for="form3Example1">Email address</label>
+                </div>
+                <!-- Last Name input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="Address" class="form-control" asp-for="Address" required />
+                    <label class="form-label" for="LastName">Address</label>
+                </div>
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="form3Example2" class="form-control" asp-for="Password" required />
+                    <label class="form-label" for="form3Example2">Password</label>
+                </div>
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="ConfirmPassword" class="form-control" asp-for="ConfirmPassword" required />
+                    <label class="form-label" for="ConfirmPassword">Password</label>
+                </div>       
+
+                <!-- Submit button -->
+                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary w-100 btn-block mb-4">
+                    Create
+                </button>
+
+            </form>
+        </div>
+    </div>
+</section>
+<!-- Section: Design Block -->

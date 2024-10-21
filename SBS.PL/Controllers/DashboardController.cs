@@ -57,5 +57,53 @@ namespace Services_Booking_System.Controllers
         {
             return View();
         }
+        public IActionResult AddAdmin()
+        {
+            return View("AddAdmin");
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddAdmin(AddAdminViewModel addAdminViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.Address = addAdminViewModel.Address;
+                user.FirstName = addAdminViewModel.FirstName;
+                user.LastName = addAdminViewModel.LastName;
+                user.Email = addAdminViewModel.Email;
+                user.UserName = addAdminViewModel.Email;
+                var identityresult = await userManager.CreateAsync(user, addAdminViewModel.Password);
+                if(!identityresult.Succeeded)
+                {
+                    foreach(var item in identityresult.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                    return View("AddAdmin",addAdminViewModel);
+                }
+                await userManager.AddToRoleAsync(user, "Admin");
+                return RedirectToAction("Index");
+            }
+            return View("AddAdmin", addAdminViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUserByEmail(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return NotFound($"User with email {email} not found.");
+            }
+
+            var result = await userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return Ok($"User with email {email} deleted successfully.");
+            }
+
+            return BadRequest("Error occurred while deleting the user.");
+        }
+
     }
 }
