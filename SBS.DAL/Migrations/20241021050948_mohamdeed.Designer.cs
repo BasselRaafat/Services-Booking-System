@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingService.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241020152827_mohamed")]
-    partial class mohamed
+    [Migration("20241021050948_mohamdeed")]
+    partial class mohamdeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,7 +118,6 @@ namespace BookingService.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BasePrice")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CategoryId")
@@ -135,7 +134,7 @@ namespace BookingService.DAL.Migrations
                     b.Property<string>("PhotoName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ServiceCategoryId")
+                    b.Property<int?>("ServiceCategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -160,9 +159,6 @@ namespace BookingService.DAL.Migrations
                     b.Property<string>("Bio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("BookingId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("BookingNumber")
                         .HasColumnType("int");
@@ -199,11 +195,17 @@ namespace BookingService.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(2,1)");
 
-                    b.Property<int?>("ReviewId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("StartTo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Startfrom")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

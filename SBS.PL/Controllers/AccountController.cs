@@ -230,6 +230,15 @@ namespace WEBPage.Controllers
             var TechDb = context.Technician.FirstOrDefault(x => x.Id == TechId);
             var servicesDb = context.Service
                 .Where(s => s.TechnicianService.Any(ts => ts.TechnicianId == TechId)).ToList();
+
+
+            if (TechDb == null)
+            {
+                return NotFound($"tech {TechId} not found");
+            }
+
+
+
             //var reviews = context.Review.Where(r => r.TechnicianId == TechId).ToList();
             //int reviewsCount = reviews.Any() ? reviews.Count : 0;
             //decimal averageRating = (decimal)((reviewsCount > 0) ? Math.Round(reviews.Average(r => r.Rating), 2) : 0);
@@ -288,10 +297,7 @@ namespace WEBPage.Controllers
             //        }
             //    }
             //};
-            if (TechDb == null)
-            {
-                return NotFound($"tech {TechId} not found");
-            }
+            
             return View(Aboellil);
         }
 

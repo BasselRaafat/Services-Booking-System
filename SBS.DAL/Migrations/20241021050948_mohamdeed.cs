@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookingService.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class mohamed : Migration
+    public partial class mohamdeed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -83,10 +83,11 @@ namespace BookingService.DAL.Migrations
                     BookingNumber = table.Column<int>(type: "int", nullable: true),
                     Bio = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Startfrom = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartTo = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rating = table.Column<decimal>(type: "decimal(2,1)", nullable: false),
-                    ReviewId = table.Column<int>(type: "int", nullable: true),
-                    BookingId = table.Column<int>(type: "int", nullable: true)
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Rating = table.Column<decimal>(type: "decimal(2,1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -227,9 +228,9 @@ namespace BookingService.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BasePrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BasePrice = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhotoName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ServiceCategoryId = table.Column<int>(type: "int", nullable: false),
+                    ServiceCategoryId = table.Column<int>(type: "int", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
