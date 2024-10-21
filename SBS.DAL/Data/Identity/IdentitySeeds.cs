@@ -12,7 +12,7 @@ namespace WEBPage.Models.Identity
         {
             using var scope = serviceProvider.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            await context.Database.MigrateAsync();  
+            //await context.Database.MigrateAsync();  
 
             var usermanager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var rolemanager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();

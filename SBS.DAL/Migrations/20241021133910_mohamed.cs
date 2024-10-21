@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookingService.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class mohamdeed : Migration
+    public partial class mohamed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
