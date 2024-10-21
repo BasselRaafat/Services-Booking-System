@@ -12,6 +12,7 @@ namespace Services_Booking_System.View_Models
         public string ProviderBio { get; set; }
         public List<string> Skills { get; set; }
         public List<ServiceForProviderViewModel> Services { get; set; }
+        public AddServiceModel addService { get; set; }
     }
 
     public class ServiceForProviderViewModel
@@ -22,7 +23,13 @@ namespace Services_Booking_System.View_Models
         public int ServiceReviewsCount { get; set; }
         public string ServiceDescription { get; set; }
     }
-
+    public class AddServiceModel
+    {
+        public string ServiceName { get; set; }
+        public double ServicePrice { get; set; }
+        public string ServiceDescription { get; set; }
+        public int ServiceCategoryId { get; set; }
+    }
   
 
 }

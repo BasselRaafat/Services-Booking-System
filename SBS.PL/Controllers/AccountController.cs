@@ -219,13 +219,14 @@ namespace WEBPage.Controllers
 
 
 
-
+        private static int puplicTechId;
 
 
 
         [Route("Account/technicalProfile/{TechId:int}")]
         public IActionResult technicalProfile([FromRoute] int TechId)
         {
+            puplicTechId = TechId;
             var TechDb = context.Technician.FirstOrDefault(x => x.Id == TechId);
             var servicesDb = context.Service
                 .Where(s => s.TechnicianService.Any(ts => ts.TechnicianId == TechId)).ToList();
@@ -258,46 +259,112 @@ namespace WEBPage.Controllers
                 Skills = servicesDb.Select(x => x.Name).ToList(),
                 Services = services
             };
-            var model = new ProviderPortfolioViewModel
-            {
-                ProviderName = "Carlos S.",
-                ProviderImageUrl = "https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg?auto=compress&cs=tinysrgb&w=600",
-                ProviderRating = 4.9m,
-                TotalReviews = 305,
-                TotalTasksCompleted = 483,
-                ProviderBio = "I am thrilled at the prospect of assisting you with your needs, and I extend my sincere gratitude for considering my services.",
-                Skills = new List<string> { "Cleaning", "Electrical Help", "Full Service Moving" },
-                Services = new List<ServiceForProviderViewModel>
-                {
-                    new ServiceForProviderViewModel
-                    {
-                        ServiceName = "Cleaning",
-                        ServicePrice = 72.37m,
-                        ServiceRating = 4.9m,
-                        ServiceReviewsCount = 123,
-                        ServiceDescription = "Beyond technical skills, I pride myself on professionalism and commitment to customer satisfaction."
-                    },
-                    new ServiceForProviderViewModel
-                    {
-                        ServiceName = "Electrical Help",
-                        ServicePrice = 60.31m,
-                        ServiceRating = 5.0m,
-                        ServiceReviewsCount = 2,
-                        ServiceDescription = "I have a vast experience in multiple construction trades and know exactly how to help you."
-                    }
-                }
-            };
+            //var model = new ProviderPortfolioViewModel
+            //{
+            //    ProviderName = "Carlos S.",
+            //    ProviderImageUrl = "https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg?auto=compress&cs=tinysrgb&w=600",
+            //    ProviderRating = 4.9m,
+            //    TotalReviews = 305,
+            //    TotalTasksCompleted = 483,
+            //    ProviderBio = "I am thrilled at the prospect of assisting you with your needs, and I extend my sincere gratitude for considering my services.",
+            //    Skills = new List<string> { "Cleaning", "Electrical Help", "Full Service Moving" },
+            //    Services = new List<ServiceForProviderViewModel>
+            //    {
+            //        new ServiceForProviderViewModel
+            //        {
+            //            ServiceName = "Cleaning",
+            //            ServicePrice = 72.37m,
+            //            ServiceRating = 4.9m,
+            //            ServiceReviewsCount = 123,
+            //            ServiceDescription = "Beyond technical skills, I pride myself on professionalism and commitment to customer satisfaction."
+            //        },
+            //        new ServiceForProviderViewModel
+            //        {
+            //            ServiceName = "Electrical Help",
+            //            ServicePrice = 60.31m,
+            //            ServiceRating = 5.0m,
+            //            ServiceReviewsCount = 2,
+            //            ServiceDescription = "I have a vast experience in multiple construction trades and know exactly how to help you."
+            //        }
+            //    }
+            //};
             if (TechDb == null)
             {
                 return NotFound($"tech {TechId} not found");
             }
             return View(Aboellil);
         }
+
+
+
         // Edit profile
+        [HttpPost]
+        public IActionResult EditName(ProviderPortfolioViewModel provider)
+        {
+            TempData["ProviderName"] = provider.ProviderName;
+            var tech = context.Technician.FirstOrDefault(x => x.Id == puplicTechId);
+            tech.FirstName = provider.ProviderName;
+            tech.LastName = "";
+            context.Update(tech);
+            context.SaveChanges();
+            return RedirectToAction("technicalProfile", new { TechId = puplicTechId });
+        }
+
+        // Action to edit the provider's bio
+        [HttpPost]
+        public IActionResult EditBio(ProviderPortfolioViewModel provider)
+        {
+            TempData["ProviderBio"] = provider.ProviderBio;
+            var tech = context.Technician.FirstOrDefault(x=>x.Id== puplicTechId);
+            tech.Bio= provider.ProviderBio;
+            context.Update(tech);
+            context.SaveChanges();
+            return RedirectToAction("technicalProfile", new { TechId = puplicTechId });
+        }
+
+        // Action to add a new service
+        public IActionResult AddService(AddServiceModel model)
+        {
+            if (string.IsNullOrEmpty(model.ServiceName))
+            {
+                ModelState.AddModelError("newService", "Service Name cannot be empty.");
+                return RedirectToAction("technicalProfile");
+            }
+
+            var newService = new Service
+            {
+                Name = model.ServiceName,
+                Description = model.ServiceDescription, 
+                CategoryId = model.ServiceCategoryId
+            };
+            context.Service.Add(newService);
+            context.SaveChanges();
+            context.TechnicianService.Add(new TechnicianService
+            {
+                TechnicianId = puplicTechId,
+                ServiceId = newService.Id,
+                Price = model.ServicePrice
+            });
+
+            context.SaveChanges();
+
+            TempData["Message"] = $"{model.ServiceName} has been added.";
+            return RedirectToAction("technicalProfile", new { TechId = puplicTechId });
+        }
 
 
-
-
+        // Action to delete a service
+        [HttpPost]
+        public IActionResult DeleteService(string skillToDelete)
+        {
+            // Remove the service (in real application, remove from database)
+            var service = context.Service.FirstOrDefault(x => x.Name == skillToDelete);
+            var deleteitem = context.TechnicianService.FirstOrDefault(x => x.TechnicianId == puplicTechId && x.ServiceId == service.Id);
+            context.TechnicianService.Remove(deleteitem);
+            context.SaveChanges();
+            TempData["Message"] = $"{skillToDelete} has been deleted.";
+            return RedirectToAction("technicalProfile", new { TechId = puplicTechId });
+        }
 
 
     }
